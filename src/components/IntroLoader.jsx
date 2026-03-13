@@ -133,7 +133,7 @@ const IntroLoader = ({ onComplete }) => {
             className="mt-14 flex flex-col items-center gap-3"
           >
             <div className="text-[10px] font-mono font-bold text-blue-600 tracking-[0.2em]">
-               INITIALIZING_SUCCESS_{progress}%
+               INITIALIZING_PITCH_{progress}%
             </div>
             <div className="w-48 h-[2px] bg-slate-100 rounded-full overflow-hidden">
                <motion.div 
