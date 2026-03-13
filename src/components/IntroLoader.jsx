@@ -132,7 +132,7 @@ const IntroLoader = ({ onComplete }) => {
             transition={{ delay: 1.5 }}
             className="mt-10 md:mt-14 flex flex-col items-center gap-3 w-full max-w-[200px] md:max-w-[250px]"
           >
-            <div className="text-[10px] font-mono font-bold text-blue-600 tracking-[0.1em] md:tracking-[0.2em] whitespace-nowrap">
+            <div className="text-[10px] font-mono font-bold text-blue-600 tracking-[0.2em]">
                INITIALIZING_SUCCESS_{progress}%
             </div>
             <div className="w-full h-[2px] bg-slate-100 rounded-full overflow-hidden">
