@@ -47,21 +47,18 @@ const Hero = () => {
         <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-[0.02] pointer-events-none"></div>
       </div>
 
-      {/* Floating Interactive Startup Icons */}
-      <div className="absolute inset-0 pointer-events-none -z-0">
+      {/* Floating Interactive Background Elements */}
+      <div className="absolute inset-0 pointer-events-none -z-0 overflow-hidden">
+        {/* Main Icons */}
         {icons.map((item, i) => {
-          // Individual physics-based springs for each icon
-          const iconX = useSpring(useTransform(mouseX, (x) => (x - window.innerWidth / 2) * 0.05 * (i + 1)));
-          const iconY = useSpring(useTransform(mouseY, (y) => (y - window.innerHeight / 2) * 0.05 * (i + 1)));
+          const iconX = useSpring(useTransform(mouseX, (x) => (x - window.innerWidth / 2) * 0.08 * (i + 1)));
+          const iconY = useSpring(useTransform(mouseY, (y) => (y - window.innerHeight / 2) * 0.08 * (i + 1)));
 
           return (
             <motion.div
-              key={i}
+              key={`icon-${i}`}
               initial={{ opacity: 0, scale: 0.5 }}
-              animate={{ 
-                opacity: 0.6, 
-                scale: 1,
-              }}
+              animate={{ opacity: 0.4, scale: 1 }}
               style={{ 
                 top: item.top, 
                 bottom: item.bottom, 
@@ -70,13 +67,37 @@ const Hero = () => {
                 x: iconX,
                 y: iconY
               }}
-              transition={{ 
-                opacity: { duration: 1, delay: item.delay }
-              }}
-              className={`absolute p-5 bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl shadow-slate-200/30 border border-slate-100/50 ${item.color} text-4xl`}
+              transition={{ opacity: { duration: 1, delay: item.delay } }}
+              className={`absolute p-5 bg-white/40 backdrop-blur-[2px] rounded-3xl shadow-xl border border-slate-100/30 ${item.color} text-4xl hidden lg:block`}
             >
               <item.Icon />
             </motion.div>
+          );
+        })}
+
+        {/* Small Particles/Shapes */}
+        {[...Array(12)].map((_, i) => {
+          const baseX = (i * 15) % 100;
+          const baseY = (i * 23) % 100;
+          const speedFactor = 0.1 + (i % 5) * 0.05;
+          
+          const partX = useSpring(useTransform(mouseX, (x) => (x - window.innerWidth / 2) * speedFactor * 1.5));
+          const partY = useSpring(useTransform(mouseY, (y) => (y - window.innerHeight / 2) * speedFactor * 1.5));
+
+          return (
+            <motion.div
+              key={`particle-${i}`}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: [0.1, 0.3, 0.1], scale: [1, 1.2, 1] }}
+              transition={{ duration: 3 + (i % 3), repeat: Infinity }}
+              style={{ 
+                left: `${baseX}%`, 
+                top: `${baseY}%`,
+                x: partX,
+                y: partY
+              }}
+              className={`absolute w-${i % 2 === 0 ? '2' : '3'} h-${i % 2 === 0 ? '2' : '3'} rounded-full ${i % 3 === 0 ? 'bg-blue-400' : i % 3 === 1 ? 'bg-indigo-300' : 'bg-sky-200'} blur-[1px]`}
+            />
           );
         })}
       </div>

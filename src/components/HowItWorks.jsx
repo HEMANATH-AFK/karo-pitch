@@ -9,7 +9,7 @@ const HowItWorks = () => {
     offset: ["start center", "end center"]
   });
 
-  const scaleY = useSpring(scrollYProgress, {
+  const pathLength = useSpring(scrollYProgress, {
     stiffness: 100,
     damping: 30,
     restDelta: 0.001
@@ -17,70 +17,101 @@ const HowItWorks = () => {
 
   const steps = [
     {
-      title: "Apply with pitch deck",
-      description: "Submit your business plan through our streamlined application portal.",
+      title: "Apply with Pitch Deck",
+      description: "Submit your business plan through our streamlined application portal. We look for vision and scalability.",
       icon: <HiDocumentText />,
+      sub: "Phase 01"
     },
     {
-      title: "Experts shortlist",
-      description: "Our panel selects the most promising and scalable business models.",
+      title: "Expert Curation",
+      description: "Our panel of industry veterans selects the most promising and scalable business models for the next cohort.",
       icon: <HiCheckCircle />,
+      sub: "Phase 02"
     },
     {
-      title: "Pitch to investors",
-      description: "Present your vision directly to active angel investors and VC partners.",
+      title: "The Main Pitch",
+      description: "Present your vision directly to active angel investors and VC partners in a high-stakes setting.",
       icon: <HiMicrophone />,
+      sub: "Phase 03"
     },
     {
-      title: "Raise and Scale",
-      description: "Secure investment and gain mentorship to take your startup national.",
+      title: "Scale Nationally",
+      description: "Secure the investment and gain the strategic mentorship required to take your startup to every corner of India.",
       icon: <HiChartBar />,
+      sub: "Phase 04"
     },
   ];
 
   return (
-    <section id="how-it-works" className="section-padding bg-slate-50 relative overflow-hidden">
-      <div className="container mx-auto">
-        <div className="text-center max-w-3xl mx-auto mb-24">
+    <section id="how-it-works" ref={containerRef} className="section-padding bg-slate-50 relative overflow-hidden">
+      {/* Background Text */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[15vw] font-black text-slate-100/50 select-none pointer-events-none -z-0">
+        PROCESS
+      </div>
+
+      <div className="container mx-auto relative z-10">
+        <div className="text-center max-w-3xl mx-auto mb-32">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <span className="text-blue-600 font-black uppercase tracking-[0.3em] text-[11px] mb-4 block">How it Works</span>
-            <h2 className="text-4xl md:text-6xl font-black text-slate-900 mb-6 tracking-tighter">
-              Pathway to <span className="text-blue-600">Growth</span>
+            <span className="text-blue-600 font-black uppercase tracking-[0.4em] text-[11px] mb-4 block">The Journey</span>
+            <h2 className="text-5xl md:text-7xl font-black text-slate-900 mb-8 tracking-tighter leading-tight">
+              A Transparent <br />
+              <span className="text-blue-600">Pathway to Success</span>
             </h2>
-            <p className="text-lg text-slate-500 font-medium leading-relaxed">
-              A professional and transparent 4-step journey designed for the modern Indian founder.
+            <p className="text-xl text-slate-500 font-medium leading-relaxed">
+              We've simplified the fundraising process into four strategic phases for the modern Indian founder.
             </p>
           </motion.div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative z-10">
-          {steps.map((step, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              className="group"
-            >
-              <div className="h-full p-10 saas-card text-center flex flex-col items-center">
-                <div className="w-16 h-16 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center text-3xl mb-8 group-hover:bg-blue-600 group-hover:text-white group-hover:rotate-6 transition-all shadow-sm">
-                  {step.icon}
+        <div className="max-w-5xl mx-auto relative px-6">
+          {/* Central Line */}
+          <div className="absolute left-1/2 top-0 bottom-0 w-1 bg-slate-200 -translate-x-1/2 hidden md:block" />
+          <motion.div 
+            style={{ scaleY: pathLength, originY: 0 }}
+            className="absolute left-1/2 top-0 bottom-0 w-1 bg-blue-600 -translate-x-1/2 hidden md:block z-10"
+          />
+
+          <div className="space-y-24 md:space-y-32">
+            {steps.map((step, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.8, delay: 0.1 }}
+                className={`flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} items-center gap-12 md:gap-24`}
+              >
+                {/* Content */}
+                <div className={`md:w-1/2 ${index % 2 === 0 ? 'md:text-right text-center' : 'md:text-left text-center'}`}>
+                  <div className={`flex flex-col ${index % 2 === 0 ? 'md:items-end items-center' : 'md:items-start items-center'}`}>
+                    <span className="text-blue-600 font-black uppercase tracking-widest text-xs mb-3">{step.sub}</span>
+                    <h3 className="text-3xl font-black text-slate-900 mb-5 tracking-tight">{step.title}</h3>
+                    <p className="text-slate-500 text-lg leading-relaxed font-medium">
+                      {step.description}
+                    </p>
+                  </div>
                 </div>
-                <div className="mb-4">
-                  <span className="text-[10px] font-black text-blue-600 uppercase tracking-widest mb-1 block">Step 0{index + 1}</span>
-                  <h3 className="text-xl font-black text-slate-900 tracking-tight">{step.title}</h3>
+
+                {/* Point */}
+                <div className="relative z-20 flex-shrink-0">
+                  <motion.div 
+                    whileInView={{ scale: [0, 1.2, 1] }}
+                    viewport={{ once: true }}
+                    className="w-20 h-20 bg-white rounded-3xl shadow-xl border-4 border-slate-50 flex items-center justify-center text-3xl text-blue-600 transition-colors group-hover:bg-blue-600 group-hover:text-white"
+                  >
+                    {step.icon}
+                  </motion.div>
                 </div>
-                <p className="text-slate-500 text-sm leading-relaxed font-medium">
-                  {step.description}
-                </p>
-              </div>
-            </motion.div>
-          ))}
+
+                {/* Empty space for balance */}
+                <div className="md:w-1/2 hidden md:block" />
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

@@ -3,18 +3,26 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const IntroLoader = ({ onComplete }) => {
   const [stage, setStage] = useState(0); // 0: Init, 1: Flash/Glow, 2: Logo, 3: Exit
+  const [progress, setProgress] = useState(0);
 
   useEffect(() => {
     const timer1 = setTimeout(() => setStage(1), 400);
     const timer2 = setTimeout(() => setStage(2), 1000);
-    const timer3 = setTimeout(() => onComplete(), 3800);
+    const timer3 = setTimeout(() => onComplete(), 4200);
+
+    const interval = setInterval(() => {
+      setProgress(prev => (prev < 100 ? prev + 1 : 100));
+    }, 25);
     
     return () => {
       clearTimeout(timer1);
       clearTimeout(timer2);
       clearTimeout(timer3);
+      clearInterval(interval);
     };
   }, [onComplete]);
+
+  const letters = "Karo Pitch".split("");
 
   return (
     <motion.div
@@ -27,6 +35,13 @@ const IntroLoader = ({ onComplete }) => {
       }}
       className="fixed inset-0 z-[1000] bg-white flex items-center justify-center overflow-hidden"
     >
+      {/* Scanline Effect */}
+      <motion.div 
+        animate={{ y: ["-100%", "200%"] }}
+        transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+        className="absolute inset-x-0 h-[30vh] bg-gradient-to-b from-transparent via-blue-50/40 to-transparent z-0"
+      />
+
       {/* Premium Gravity Pulse BG */}
       <AnimatePresence>
         {stage >= 1 && (
@@ -77,23 +92,30 @@ const IntroLoader = ({ onComplete }) => {
             />
           </motion.div>
 
-          {/* Headline Reveal */}
-          <div className="overflow-hidden mb-6">
-            <motion.h1 
-              initial={{ y: "100%" }}
-              animate={stage >= 2 ? { y: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              className="text-5xl md:text-7xl font-black text-slate-900 tracking-tighter"
-            >
-              Karo <span className="text-blue-600">Pitch</span>
-            </motion.h1>
+          {/* Headline Reveal (Staggered) */}
+          <div className="flex overflow-hidden mb-6">
+            {letters.map((char, i) => (
+              <motion.span
+                key={i}
+                initial={{ y: "100%" }}
+                animate={stage >= 2 ? { y: 0 } : {}}
+                transition={{ 
+                  duration: 0.8, 
+                  delay: 0.5 + (i * 0.05), 
+                  ease: [0.16, 1, 0.3, 1] 
+                }}
+                className={`text-5xl md:text-7xl font-black tracking-tighter ${char === ' ' ? 'mx-2' : ''} ${i > 4 ? 'text-blue-600' : 'text-slate-900'}`}
+              >
+                {char}
+              </motion.span>
+            ))}
           </div>
 
           {/* Sophisticated Subtitle */}
           <motion.div
             initial={{ opacity: 0, filter: "blur(10px)" }}
             animate={stage >= 2 ? { opacity: 1, filter: "blur(0px)" } : {}}
-            transition={{ duration: 1.2, delay: 0.8 }}
+            transition={{ duration: 1.2, delay: 1.2 }}
             className="flex items-center gap-4"
           >
             <div className="w-8 h-px bg-slate-200" />
@@ -103,18 +125,30 @@ const IntroLoader = ({ onComplete }) => {
             <div className="w-8 h-px bg-slate-200" />
           </motion.div>
           
+          {/* Tech Progress Bar */}
           <motion.div 
-            initial={{ scaleX: 0 }}
-            animate={stage >= 2 ? { scaleX: 1 } : {}}
-            transition={{ delay: 1.2, duration: 1.5, ease: "easeInOut" }}
-            className="w-32 h-[2px] bg-gradient-to-r from-transparent via-blue-200 to-transparent mt-12 rounded-full"
-          />
+            initial={{ opacity: 0 }}
+            animate={stage >= 2 ? { opacity: 1 } : {}}
+            transition={{ delay: 1.5 }}
+            className="mt-14 flex flex-col items-center gap-3"
+          >
+            <div className="text-[10px] font-mono font-bold text-blue-600 tracking-[0.2em]">
+               INITIALIZING_SUCCESS_{progress}%
+            </div>
+            <div className="w-48 h-[2px] bg-slate-100 rounded-full overflow-hidden">
+               <motion.div 
+                 initial={{ width: 0 }}
+                 animate={{ width: `${progress}%` }}
+                 className="h-full bg-blue-600"
+               />
+            </div>
+          </motion.div>
         </motion.div>
       </div>
 
       {/* Extreme Low-Op Detail */}
       <div className="absolute inset-0 pointer-events-none opacity-[0.03]">
-        <div className="w-full h-full bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]" />
+        <div className="w-full h-full bg-[url('https://www.transparenttextures.com/patterns/60-lines.png')]" />
       </div>
     </motion.div>
   );
