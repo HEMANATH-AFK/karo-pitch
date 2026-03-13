@@ -15,7 +15,7 @@ const WhoCanApply = () => {
       name: "D2C Brands", 
       icon: <HiShoppingBag />, 
       description: "Direct-to-consumer product brands scaling in the Indian market.",
-      size: "col-span-2",
+      size: "md:col-span-2 col-span-1",
       color: "from-blue-500/10 to-blue-600/5",
       iconColor: "text-blue-600"
     },
@@ -31,7 +31,7 @@ const WhoCanApply = () => {
       name: "MSMEs", 
       icon: <HiOfficeBuilding />, 
       description: "Small and medium enterprises with high scalability and innovation.",
-      size: "col-span-1 row-span-2",
+      size: "md:col-span-1 md:row-span-2 col-span-1",
       color: "from-sky-500/10 to-sky-600/5",
       iconColor: "text-sky-600"
     },
@@ -55,7 +55,7 @@ const WhoCanApply = () => {
       name: "Bharat-focused", 
       icon: <HiGlobeAlt />, 
       description: "Tailored solutions for the next billion users in tier 2/3 cities.",
-      size: "col-span-2",
+      size: "md:col-span-2 col-span-1",
       color: "from-orange-500/10 to-orange-600/5",
       iconColor: "text-orange-600"
     },
@@ -81,7 +81,7 @@ const WhoCanApply = () => {
           </motion.div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[280px]">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-auto md:auto-rows-[280px]">
           {categories.map((category, index) => (
             <motion.div
               key={category.name}
@@ -89,7 +89,7 @@ const WhoCanApply = () => {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className={`group relative p-10 rounded-[45px] border border-slate-100 overflow-hidden bg-white hover:border-blue-200 transition-all duration-700 shadow-sm hover:shadow-2xl hover:shadow-blue-100/40 flex flex-col justify-end ${category.size}`}
+              className={`group relative p-8 md:p-10 rounded-[35px] md:rounded-[45px] border border-slate-100 overflow-hidden bg-white hover:border-blue-200 transition-all duration-700 shadow-sm hover:shadow-2xl hover:shadow-blue-100/40 flex flex-col justify-end min-h-[240px] md:min-h-0 ${category.size}`}
             >
               {/* Colored Background Glow */}
               <div className={`absolute top-0 right-0 w-64 h-64 bg-gradient-to-br ${category.color} rounded-full blur-[100px] opacity-0 group-hover:opacity-100 transition-opacity duration-1000`} />

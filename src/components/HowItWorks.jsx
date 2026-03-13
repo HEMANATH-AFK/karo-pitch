@@ -67,15 +67,15 @@ const HowItWorks = () => {
           </motion.div>
         </div>
 
-        <div className="max-w-5xl mx-auto relative px-6">
-          {/* Central Line */}
-          <div className="absolute left-1/2 top-0 bottom-0 w-1 bg-slate-200 -translate-x-1/2 hidden md:block" />
+        <div className="max-w-5xl mx-auto relative px-4 md:px-6">
+          {/* Central Line - Mobile: Left-aligned, Desktop: Centered */}
+          <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-1 bg-slate-200 -translate-x-1/2" />
           <motion.div 
             style={{ scaleY: pathLength, originY: 0 }}
-            className="absolute left-1/2 top-0 bottom-0 w-1 bg-blue-600 -translate-x-1/2 hidden md:block z-10"
+            className="absolute left-8 md:left-1/2 top-0 bottom-0 w-1 bg-blue-600 -translate-x-1/2 z-10"
           />
 
-          <div className="space-y-24 md:space-y-32">
+          <div className="space-y-20 md:space-y-32">
             {steps.map((step, index) => (
               <motion.div
                 key={index}
@@ -83,31 +83,31 @@ const HowItWorks = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
                 transition={{ duration: 0.8, delay: 0.1 }}
-                className={`flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} items-center gap-12 md:gap-24`}
+                className={`relative flex flex-col md:flex-row ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} items-center md:items-center gap-8 md:gap-24`}
               >
-                {/* Content */}
-                <div className={`md:w-1/2 ${index % 2 === 0 ? 'md:text-right text-center' : 'md:text-left text-center'}`}>
-                  <div className={`flex flex-col ${index % 2 === 0 ? 'md:items-end items-center' : 'md:items-start items-center'}`}>
-                    <span className="text-blue-600 font-black uppercase tracking-widest text-xs mb-3">{step.sub}</span>
-                    <h3 className="text-3xl font-black text-slate-900 mb-5 tracking-tight">{step.title}</h3>
-                    <p className="text-slate-500 text-lg leading-relaxed font-medium">
+                {/* Content - Desktop: Alternates, Mobile: Stays right */}
+                <div className={`w-full md:w-1/2 pl-20 md:pl-0 ${index % 2 === 0 ? 'md:text-right text-left' : 'md:text-left text-left'}`}>
+                  <div className={`flex flex-col ${index % 2 === 0 ? 'md:items-end items-start' : 'md:items-start items-start'}`}>
+                    <span className="text-blue-600 font-black uppercase tracking-widest text-xs mb-2 md:mb-3">{step.sub}</span>
+                    <h3 className="text-2xl md:text-3xl font-black text-slate-900 mb-4 md:mb-5 tracking-tight leading-tight">{step.title}</h3>
+                    <p className="text-slate-500 text-base md:text-lg leading-relaxed font-medium">
                       {step.description}
                     </p>
                   </div>
                 </div>
 
-                {/* Point */}
-                <div className="relative z-20 flex-shrink-0">
+                {/* Point - Absolute on mobile to stay on line */}
+                <div className="absolute left-8 md:relative md:left-auto md:translate-x-0 -translate-x-1/2 z-20 flex-shrink-0">
                   <motion.div 
                     whileInView={{ scale: [0, 1.2, 1] }}
                     viewport={{ once: true }}
-                    className="w-20 h-20 bg-white rounded-3xl shadow-xl border-4 border-slate-50 flex items-center justify-center text-3xl text-blue-600 transition-colors group-hover:bg-blue-600 group-hover:text-white"
+                    className="w-14 h-14 md:w-20 md:h-20 bg-white rounded-2xl md:rounded-3xl shadow-xl border-4 border-slate-50 flex items-center justify-center text-2xl md:text-3xl text-blue-600 transition-colors"
                   >
                     {step.icon}
                   </motion.div>
                 </div>
 
-                {/* Empty space for balance */}
+                {/* Empty space for balance - Hidden on mobile */}
                 <div className="md:w-1/2 hidden md:block" />
               </motion.div>
             ))}

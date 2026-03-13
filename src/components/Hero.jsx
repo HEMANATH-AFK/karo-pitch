@@ -96,7 +96,7 @@ const Hero = () => {
                 x: partX,
                 y: partY
               }}
-              className={`absolute w-${i % 2 === 0 ? '2' : '3'} h-${i % 2 === 0 ? '2' : '3'} rounded-full ${i % 3 === 0 ? 'bg-blue-400' : i % 3 === 1 ? 'bg-indigo-300' : 'bg-sky-200'} blur-[1px]`}
+              className={`absolute w-${i % 2 === 0 ? '2' : '3'} h-${i % 2 === 0 ? '2' : '3'} rounded-full ${i % 3 === 0 ? 'bg-blue-400' : i % 3 === 1 ? 'bg-indigo-300' : 'bg-sky-200'} blur-[1px] ${i > 6 ? 'hidden md:block' : ''}`}
             />
           );
         })}
@@ -112,34 +112,34 @@ const Hero = () => {
              initial={{ opacity: 0, scale: 0.9 }}
              animate={{ opacity: 1, scale: 1 }}
              transition={{ delay: 0.4 }}
-             className="inline-flex items-center gap-2 px-5 py-2 mb-10 text-[11px] font-black tracking-widest text-blue-600 uppercase bg-blue-50/80 backdrop-blur-sm border border-blue-100 rounded-full"
+             className="inline-flex items-center gap-2 px-5 py-2 mb-10 text-[10px] md:text-[11px] font-black tracking-widest text-blue-600 uppercase bg-blue-50/80 backdrop-blur-sm border border-blue-100 rounded-full"
           >
             <span className="w-2 h-2 bg-blue-600 rounded-full animate-pulse"></span>
             India's Most Active Pitch Platform
           </motion.div>
           
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-slate-900 leading-[1.05] mb-8 tracking-tighter">
-            Pitch Your Startup to <br />
+          <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black text-slate-900 leading-[1.05] mb-8 tracking-tighter">
+            Pitch Your Startup to <br className="hidden sm:block" />
             <span className="gradient-text-blue">India's Top Investors</span>
           </h1>
           
-          <p className="max-w-3xl mx-auto text-lg md:text-xl text-slate-500 mb-14 leading-relaxed font-medium">
+          <p className="max-w-3xl mx-auto text-base md:text-xl text-slate-500 mb-10 md:mb-14 leading-relaxed font-medium">
             Karo Pitch is a curated national platform where Bharat's most innovative founders present directly to institutional capital and strategic mentors.
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 md:gap-6">
             <motion.button
               whileHover={{ scale: 1.03, y: -4, boxShadow: "0 20px 40px rgba(37, 99, 235, 0.2)" }}
               whileTap={{ scale: 0.97 }}
-              className="px-10 py-5 bg-blue-600 text-white rounded-2xl font-black text-lg shadow-xl shadow-blue-100 flex items-center gap-3 transition-all"
+              className="w-full sm:w-auto px-8 md:px-10 py-4 md:py-5 bg-blue-600 text-white rounded-2xl font-black text-base md:text-lg shadow-xl shadow-blue-100 flex items-center justify-center gap-3 transition-all"
             >
-              Apply to Pitch <HiArrowRight className="text-2xl" />
+              Apply to Pitch <HiArrowRight className="text-xl md:text-2xl" />
             </motion.button>
             
             <motion.button
               whileHover={{ scale: 1.03, y: -4, backgroundColor: "#f8fafc" }}
               whileTap={{ scale: 0.97 }}
-              className="px-10 py-5 bg-white/80 backdrop-blur-sm text-slate-900 border border-slate-200 rounded-2xl font-black text-lg shadow-md transition-all"
+              className="w-full sm:w-auto px-8 md:px-10 py-4 md:py-5 bg-white/80 backdrop-blur-sm text-slate-900 border border-slate-200 rounded-2xl font-black text-base md:text-lg shadow-md transition-all"
             >
               See the Cohort
             </motion.button>

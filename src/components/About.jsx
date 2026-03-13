@@ -31,13 +31,13 @@ const About = () => {
   ];
 
   return (
-    <section id="about" className="section-padding bg-white relative overflow-hidden">
+    <section id="about" className="py-20 md:py-32 bg-white relative overflow-hidden">
       {/* Decorative Background Elements */}
-      <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-[600px] h-[600px] bg-blue-50/50 rounded-full blur-[120px] -z-10" />
-      <div className="absolute bottom-0 left-0 translate-y-1/2 -translate-x-1/2 w-[400px] h-[400px] bg-indigo-50/30 rounded-full blur-[100px] -z-10" />
+      <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-[400px] md:w-[600px] h-[400px] md:h-[600px] bg-blue-50/50 rounded-full blur-[100px] md:blur-[120px] -z-10" />
+      <div className="absolute bottom-0 left-0 translate-y-1/2 -translate-x-1/2 w-[300px] md:w-[400px] h-[300px] md:h-[400px] bg-indigo-50/30 rounded-full blur-[80px] md:blur-[100px] -z-10" />
 
-      <div className="container mx-auto">
-        <div className="flex flex-col lg:flex-row items-center gap-20 mb-32">
+      <div className="container mx-auto px-6 md:px-12">
+        <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20 mb-24 md:mb-32">
           <motion.div 
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -55,8 +55,8 @@ const About = () => {
               The Karo Pitch Mission
             </motion.div>
             
-            <h2 className="text-5xl md:text-7xl font-black text-slate-900 mb-8 leading-[0.95] tracking-tighter">
-              Empowering the <br />
+            <h2 className="text-4xl sm:text-5xl md:text-7xl font-black text-slate-900 mb-8 leading-[1.05] md:leading-[0.95] tracking-tighter">
+              Empowering the <br className="hidden sm:block" />
               <span className="gradient-text-blue">Next Billion Users</span>
             </h2>
             
@@ -97,10 +97,10 @@ const About = () => {
             <motion.div
               animate={{ y: [0, -15, 0] }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute -top-10 -right-10 p-6 bg-white rounded-3xl shadow-2xl border border-slate-100 hidden md:block"
+              className="absolute -top-6 -right-6 md:-top-10 md:-right-10 p-4 md:p-6 bg-white rounded-2xl md:rounded-3xl shadow-2xl border border-slate-100 hidden sm:block max-w-[140px] md:max-w-none"
             >
-              <p className="text-xs font-black text-slate-400 uppercase tracking-widest mb-1">Funding Raised</p>
-              <div className="text-3xl font-black text-blue-600 tracking-tighter">₹50Cr+</div>
+              <p className="text-[10px] md:text-xs font-black text-slate-400 uppercase tracking-widest mb-1">Funding Raised</p>
+              <div className="text-xl md:text-3xl font-black text-blue-600 tracking-tighter">₹50Cr+</div>
             </motion.div>
           </motion.div>
         </div>
@@ -113,7 +113,7 @@ const About = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="p-10 rounded-[40px] border border-slate-100 bg-white hover:border-blue-100 hover:shadow-[0_30px_60px_-15px_rgba(37,99,235,0.1)] transition-all duration-500 group relative overflow-hidden"
+              className="p-8 md:p-10 rounded-[35px] md:rounded-[40px] border border-slate-100 bg-white hover:border-blue-100 hover:shadow-[0_30px_60px_-15px_rgba(37,99,235,0.1)] transition-all duration-500 group relative overflow-hidden"
             >
               <div className={`w-16 h-16 ${feature.color} rounded-2xl flex items-center justify-center text-3xl mb-8 group-hover:text-white group-hover:rotate-6 transition-all duration-500 shadow-sm`}>
                 {feature.icon}
